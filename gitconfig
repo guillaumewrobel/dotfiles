@@ -52,3 +52,6 @@
 
 [init]
   defaultBranch = master
+[user]
+	email = guillaume.wrobel@gmail.com
+	name = Guillaume Wrobel
