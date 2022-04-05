@@ -69,3 +69,19 @@ export EDITOR=code
 
 # Set ipdb as the default Python debugger
 export PYTHONBREAKPOINT=ipdb.set_trace
+
+eval $(/opt/homebrew/bin/brew shellenv)
+eval "$(nodenv init -)"
+
+export PATH="/Users/guillaumewrobel/.rbenv/shims:${PATH}"
+
+export GPG_TTY=$(tty)
+
+alias dr='cd /Users/guillaumewrobel/code/yespark-rails'
+alias maj='brew update && brew outdated && brew upgrade && brew cleanup && softwareupdate -l'
+alias rc='rails c'
+alias rs='rails s'
+
+alias gemupdate='gem_update --commit'
+alias fetch_rebase='git fetch --all && git pull --rebase'
+alias repush='git pull --rebase && git push'
