@@ -4,7 +4,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
-plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search pyenv)
+plugins=(git gitfast brew rails last-working-dir common-aliases zsh-syntax-highlighting history-substring-search pyenv)
 
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
@@ -77,11 +77,27 @@ export PATH="/Users/guillaumewrobel/.rbenv/shims:${PATH}"
 
 export GPG_TTY=$(tty)
 
+# Navigation
 alias dr='cd /Users/guillaumewrobel/code/yespark-rails'
+
+# Update
 alias maj='brew update && brew outdated && brew upgrade && brew cleanup && softwareupdate -l'
+
+# Rails
 alias rc='rails c'
 alias rs='rails s'
-
 alias gemupdate='gem_update --commit'
+
+# Git
 alias fetch_rebase='git fetch --all && git pull --rebase'
 alias repush='git pull --rebase && git push'
+lazygit() {
+  git add .
+  if [ "$1" != "" ] # or better, if [ -n "$1" ]
+  then
+      git commit -m "$1"
+  else
+      git commit -m update
+  fi
+  git pull --rebase && git push
+}
