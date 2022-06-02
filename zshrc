@@ -101,3 +101,4 @@ lazygit() {
   fi
   git pull --rebase && git push
 }
+alias rswag='SWAGGER_DRY_RUN=0 RAILS_ENV=test rails rswag PATTERN="spec/integration/**/*_spec.rb"'
