@@ -90,7 +90,7 @@ alias rs='rails s'
 alias gemupdate='gem_update --commit'
 
 # Git
-alias fetch_rebase='git fetch --all && git pull --rebase && yarn install'
+alias fetch_rebase='git fetch --all && git pull --rebase && bundle install && yarn install'
 alias repush='git pull --rebase && git push'
 lazygit() {
   git add .
