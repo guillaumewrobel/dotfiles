@@ -74,6 +74,7 @@ eval $(/opt/homebrew/bin/brew shellenv)
 eval "$(nodenv init -)"
 
 export PATH="/Users/guillaumewrobel/.rbenv/shims:${PATH}"
+export TERMINFO=/usr/share/terminfo/
 
 export GPG_TTY=$(tty)
 
@@ -89,7 +90,7 @@ alias rs='rails s'
 alias gemupdate='gem_update --commit'
 
 # Git
-alias fetch_rebase='git fetch --all && git pull --rebase'
+alias fetch_rebase='git fetch --all && git pull --rebase && yarn install'
 alias repush='git pull --rebase && git push'
 lazygit() {
   git add .
@@ -102,3 +103,7 @@ lazygit() {
   git pull --rebase && git push
 }
 alias rswag='SWAGGER_DRY_RUN=0 RAILS_ENV=test rails rswag PATTERN="spec/integration/**/*_spec.rb"'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+eval "$(rbenv init -)"
+eval "$(rbenv init -)"
