@@ -105,5 +105,7 @@ lazygit() {
 alias rswag='SWAGGER_DRY_RUN=0 RAILS_ENV=test rails rswag PATTERN="spec/integration/**/*_spec.rb"'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-eval "$(rbenv init -)"
-eval "$(rbenv init -)"
+
+# Set ruby version for rbenv
+# export RBENV_VERSION=3.2.0
+
