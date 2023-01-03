@@ -90,7 +90,7 @@ alias rs='rails s'
 alias gemupdate='gem_update --commit'
 
 # Git
-alias fetch_rebase='git fetch --all && git pull --rebase && bundle install && yarn install'
+alias fetch_rebase='git fetch --all && git pull --rebase && bundle install'
 alias repush='git pull --rebase && git push'
 lazygit() {
   git add .
@@ -108,4 +108,4 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Set ruby version for rbenv
 # export RBENV_VERSION=3.2.0
-
+export RUBY_YJIT_ENABLE=1
