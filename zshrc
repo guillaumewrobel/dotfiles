@@ -89,6 +89,9 @@ alias rc='rails c'
 alias rs='rails s'
 alias gemupdate='gem_update --commit'
 
+# Heroku + archer
+alias hc="heroku run USER=guillaume rails console -a yespark-prod"
+
 # Git
 alias fetch_rebase='git fetch --all && git pull --rebase && bundle install'
 alias repush='git pull --rebase && git push'
