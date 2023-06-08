@@ -89,8 +89,8 @@ alias rc='rails c'
 alias rs='rails s'
 alias gemupdate='gem_update --commit'
 
-# Heroku + archer
-alias hc="heroku run USER=guillaume rails console -a yespark-prod"
+# Scalingo console
+alias sc="scalingo --app yespark-prod run rails console"
 
 # Git
 alias fetch_rebase='git fetch --all && git pull --rebase && bundle install'
@@ -112,3 +112,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Set ruby version for rbenv
 # export RBENV_VERSION=3.2.0
 export RUBY_YJIT_ENABLE=1
+
+# https://github.com/rails/rails/issues/38560#issuecomment-1139570544
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
