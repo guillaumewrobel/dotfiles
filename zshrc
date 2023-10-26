@@ -26,31 +26,9 @@ type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-
 
 # Load nvm (to manage your node versions)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# Call `nvm use` automatically in a directory with a `.nvmrc` file
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if nvm -v &> /dev/null; then
-    local node_version="$(nvm version)"
-    local nvmrc_path="$(nvm_find_nvmrc)"
-
-    if [ -n "$nvmrc_path" ]; then
-      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-      if [ "$nvmrc_node_version" = "N/A" ]; then
-        nvm install
-      elif [ "$nvmrc_node_version" != "$node_version" ]; then
-        nvm use --silent
-      fi
-    elif [ "$node_version" != "$(nvm version default)" ]; then
-      nvm use default --silent
-    fi
-  fi
-}
-type -a nvm > /dev/null && add-zsh-hook chpwd load-nvmrc
-type -a nvm > /dev/null && load-nvmrc
 
 # Rails and Ruby uses the local `bin` folder to store binstubs.
 # So instead of running `bin/rails` like the doc says, just run `rails`
@@ -71,7 +49,6 @@ export EDITOR=code
 export PYTHONBREAKPOINT=ipdb.set_trace
 
 eval $(/opt/homebrew/bin/brew shellenv)
-eval "$(nodenv init -)"
 
 export PATH="/Users/guillaumewrobel/.rbenv/shims:${PATH}"
 export TERMINFO=/usr/share/terminfo/
@@ -105,6 +82,36 @@ lazygit() {
   fi
   git pull --rebase && git push
 }
+
+# Create PR in one line
+pr() {
+  branch_name=$1
+  commit_message=$2
+
+  # Check if branch name or commit message is empty
+  if [ -z "$branch_name" ] || [ -z "$commit_message" ]; then
+    echo "Usage: pr <branch_name> <commit_message>"
+    return 1
+  fi
+
+  # Create a new branch and switch to it
+  git checkout -b "$branch_name" &&
+
+  # Add all changes to the staging area
+  git add . &&
+
+  # Commit the changes
+  git commit -m "$commit_message" &&
+
+  # Push the branch to the remote repository
+  git push -u origin "$branch_name" &&
+
+  # Create a pull request
+  # Note: This requires GitHub CLI (gh). Install it if you haven't already.
+  gh pr create --base main --head "$branch_name" --title "$commit_message" --body ""
+}
+
+
 alias rswag='SWAGGER_DRY_RUN=0 RAILS_ENV=test rails rswag PATTERN="spec/integration/**/*_spec.rb"'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
