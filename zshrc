@@ -16,10 +16,6 @@ ZSH_DISABLE_COMPFIX=true
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
-# Load rbenv if installed (to manage your Ruby versions)
-export PATH="${HOME}/.rbenv/bin:${PATH}" # Needed for Linux/WSL
-type -a rbenv > /dev/null && eval "$(rbenv init -)"
-
 # Load pyenv (to manage your Python versions)
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)" && RPROMPT+='[🐍 $(pyenv_prompt_info)]'
@@ -50,7 +46,6 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 
 eval $(/opt/homebrew/bin/brew shellenv)
 
-export PATH="/Users/guillaumewrobel/.rbenv/shims:${PATH}"
 export TERMINFO=/usr/share/terminfo/
 
 export GPG_TTY=$(tty)
@@ -115,10 +110,9 @@ pr() {
 alias rswag='SWAGGER_DRY_RUN=0 RAILS_ENV=test rails rswag PATTERN="spec/integration/**/*_spec.rb"'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-# Set ruby version for rbenv
-# export RBENV_VERSION=3.2.0
 export RUBY_YJIT_ENABLE=1
 
 # https://github.com/rails/rails/issues/38560#issuecomment-1139570544
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
